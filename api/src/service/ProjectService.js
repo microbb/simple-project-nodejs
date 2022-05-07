@@ -1,4 +1,4 @@
-import Project from "./Project.js";
+import Project from "../model/Project.js";
 import fileService from "./fileService.js";
 
 class ProjectService {

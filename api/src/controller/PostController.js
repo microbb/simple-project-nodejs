@@ -1,4 +1,4 @@
-import ProjectService from "./ProjectService.js";
+import ProjectService from "../service/ProjectService.js";
 
 
 class PostController {

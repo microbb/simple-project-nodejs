@@ -1,10 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
-import router from "./router.js";
+import router from "./router/router.js";
 import fileUpload from "express-fileupload";
-
-const PORT = process.env.PORT;
-const DB = process.env.MONGO_URL;
+import { PORT, DB } from "./configuration/index.js";
 
 const app = express();
 
