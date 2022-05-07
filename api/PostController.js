@@ -1,62 +1,49 @@
 import Project from "./Project.js";
+import ProjectService from "./ProjectService.js";
 
 class PostController {
     async create(req, res) {
         try {
-            const { p_name, p_organization, view, p_link, p_git, img, p_description, p_i_did, team_link, skills } = req.body;
-            const project = await Project.create({ p_name, p_organization, view, p_link, p_git, img, p_description, p_i_did, team_link, skills });
-
+            const project = await ProjectService.create(req.body);
             res.json(project)
         } catch (e) {
-            res.status(500).json(e)
+            res.status(500).json(e.message)
         }
     }
 
     async getAll(req, res) {
         try{
-            const projects = await Project.find();
+            const projects = await ProjectService.getAll();
             return res.json(projects);
         } catch (e) {
-            res.status(500).json(e);
+            res.status(500).json(e.message);
         }
     }
 
     async getOne(req, res) {
         try{
-            const { id } = req.params;
-            if (!id) {
-                res.status(400).json({massage: 'id not found'})
-            }
-            const project = await Project.findById(id);
+            const project = await ProjectService.getOne(req.params.id);
             return res.json(project);
         } catch (e) {
-            res.status(500).json(e)
+            res.status(500).json(e.message)
         }
     }
 
     async update(req, res) {
         try{
-            const project = req.body;
-            if (!project._id) {
-                res.status(400).json({massage: 'id not found'});
-            }
-            const updatedProject = await Project.findByIdAndUpdate(project._id, project, {new: true});
+            const updatedProject = await ProjectService.update(req.body);
             return res.json(updatedProject);
         } catch (e) {
-            res.status(500).json(e)
+            res.status(500).json(e.message)
         }
     }
 
     async delete(req, res) {
         try{
-            const { id } = req.params;
-            if (!id) {
-                res.status(400).json({massage: 'id not found'})
-            }
-            const project = await Project.findByIdAndDelete(id);
+            const project = await ProjectService.delete(req.params.id)
             return res.json(project);
         } catch (e) {
-            res.status(500).json(e)
+            res.status(500).json(e.message)
         }
     }
 }
