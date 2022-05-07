@@ -1,10 +1,10 @@
-import Project from "./Project.js";
 import ProjectService from "./ProjectService.js";
+
 
 class PostController {
     async create(req, res) {
         try {
-            const project = await ProjectService.create(req.body);
+            const project = await ProjectService.create(req.body, req.files.picture);
             res.json(project)
         } catch (e) {
             res.status(500).json(e.message)

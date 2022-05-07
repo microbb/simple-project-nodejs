@@ -1,8 +1,10 @@
 import Project from "./Project.js";
+import fileService from "./fileService.js";
 
 class ProjectService {
-    async create(project) {
-        return await Project.create(project);
+    async create(project, picture) {
+        const fileName = fileService.saveFile(picture);
+        return await Project.create({...project, picture: fileName});
     }
 
     async getAll() {

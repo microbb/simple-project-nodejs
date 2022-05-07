@@ -14,7 +14,8 @@ const Project = new Schema({
     "p_description": String,
     "p_i_did": String,
     "team_link": [String],
-    "skills": [String]
+    "skills": [String],
+    "picture": String
 });
 
 export default mongoose.model('Project', Project);
